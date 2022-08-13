@@ -11,7 +11,7 @@ connectDB();
 
 const app = express();
 
-app.get("/", (res, req) => {
+app.get("/", (req, res) => {
   res.send("SERVER IS RUNNING!");
 });
 
