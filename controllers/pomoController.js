@@ -31,13 +31,22 @@ const setPomo = asyncHandler(async (req, res) => {
   res.status(200).json(pomo);
 });
 
+// function isToday(dateParameter) {
+//   var today = new Date();
+//   return (
+//     dateParameter.getDate() === today.getDate() &&
+//     dateParameter.getMonth() === today.getMonth() &&
+//     dateParameter.getFullYear() === today.getFullYear()
+//   );
+// }
 // @desc    Set pomo
 // @route   POST /api/pomos
 // @access  Private
 const getTodayPomo = asyncHandler(async (req, res) => {
-  const timeElapsed = Date.now();
-  const today = new Date(timeElapsed);
-  const pomo = await Pomo.find({ user: req.user.id, date: today });
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  // console.log("Is today ? ", isToday(new Date())); // true
+  const pomo = await Pomo.find({ user: req.user.id, date: { $gte: today } });
   res.status(200).json(pomo);
 });
 
