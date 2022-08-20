@@ -37,7 +37,7 @@ const setPomo = asyncHandler(async (req, res) => {
 const getTodayPomo = asyncHandler(async (req, res) => {
   const timeElapsed = Date.now();
   const today = new Date(timeElapsed);
-  const pomo = await Pomo.find({ user: req.user.id }, { date: today });
+  const pomo = await Pomo.find({ user: req.user.id, date: today });
   res.status(200).json(pomo);
 });
 
